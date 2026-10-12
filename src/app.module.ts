@@ -5,6 +5,7 @@ import { AppController } from './app.controller.js';
 import { AppService } from './app.service.js';
 import { AuthModule } from './auth/auth.module.js';
 import { UserModule } from './user/user.module.js';
+import { WorkspaceModule } from './workspace/workspace.module.js';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { UserModule } from './user/user.module.js';
     AuthModule,
     ConfigModule.forRoot(),
     MongooseModule.forRoot(`${process.env.DB_UR}`),
+    WorkspaceModule,
   ],
   controllers: [AppController],
   providers: [AppService],
