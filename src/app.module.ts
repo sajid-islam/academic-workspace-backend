@@ -12,7 +12,7 @@ import { WorkspaceModule } from './workspace/workspace.module.js';
     UserModule,
     AuthModule,
     ConfigModule.forRoot(),
-    MongooseModule.forRoot(`${process.env.DB_UR}`),
+    MongooseModule.forRoot(`${process.env.DB_URI}`),
     WorkspaceModule,
   ],
   controllers: [AppController],
