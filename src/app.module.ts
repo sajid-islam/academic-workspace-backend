@@ -11,7 +11,7 @@ import { WorkspaceModule } from './workspace/workspace.module.js';
   imports: [
     UserModule,
     AuthModule,
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({ isGlobal: true }),
     MongooseModule.forRoot(`${process.env.DB_URI}`),
     WorkspaceModule,
   ],
