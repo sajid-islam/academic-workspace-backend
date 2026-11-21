@@ -22,6 +22,9 @@ export class Workspace {
 
   @Prop({ required: true })
   courses: string;
+
+  @Prop()
+  religion: string;
 }
 
 export const WorkspaceSchema = SchemaFactory.createForClass(Workspace);
