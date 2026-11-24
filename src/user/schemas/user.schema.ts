@@ -35,3 +35,9 @@ export class User {
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
+
+UserSchema.pre<UserDocument>('save', function () {
+  if (!this.user_image && this.name) {
+    this.user_image = `https://api.dicebear.com/10.x/glyphs/svg?seed=${encodeURIComponent(this.name)}`;
+  }
+});
