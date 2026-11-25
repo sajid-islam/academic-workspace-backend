@@ -6,7 +6,7 @@ import { AppController } from './app.controller.js';
 import { AppService } from './app.service.js';
 import { AuthModule } from './auth/auth.module.js';
 import { UsersModule } from './users/users.module.js';
-import { WorkspaceModule } from './workspace/workspace.module.js';
+import { WorkspacesModule } from './workspaces/workspaces.module.js';
 
 @Module({
   controllers: [AppController],
@@ -14,7 +14,7 @@ import { WorkspaceModule } from './workspace/workspace.module.js';
   imports: [
     UsersModule,
     AuthModule,
-    WorkspaceModule,
+    WorkspacesModule,
 
     ConfigModule.forRoot({ isGlobal: true }),
 
