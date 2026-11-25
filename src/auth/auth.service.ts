@@ -7,16 +7,16 @@ import { JwtService } from '@nestjs/jwt';
 import { InjectModel } from '@nestjs/mongoose';
 import bcrypt from 'bcrypt';
 import { Model } from 'mongoose';
-import { CreateUserDto } from '../user/dto/create-user.dto.js';
-import { User } from '../user/schemas/user.schema.js';
-import { UserService } from '../user/user.service.js';
+import { CreateUserDto } from '../users/dto/create-user.dto.js';
+import { User } from '../users/schemas/user.schema.js';
+import { UsersService } from '../users/users.service.js';
 import { LoginUserDto } from './dto/login-user.dto.js';
 
 @Injectable()
 export class AuthService {
   constructor(
     @InjectModel(User.name) private userModel: Model<User>,
-    private readonly userService: UserService,
+    private readonly usersService: UsersService,
     private readonly jwtService: JwtService,
   ) {}
 
@@ -51,7 +51,7 @@ export class AuthService {
       createUserDto.password,
       saltRounds,
     );
-    const user = await this.userService.createUser({
+    const user = await this.usersService.createUser({
       ...createUserDto,
       password: hashedPassword,
     });

@@ -9,7 +9,7 @@ import { CreateUserDto } from './dto/create-user.dto.js';
 import { User } from './schemas/user.schema.js';
 
 @Injectable()
-export class UserService {
+export class UsersService {
   constructor(@InjectModel(User.name) private userModel: Model<User>) {}
   async createUser(userData: CreateUserDto) {
     try {

@@ -1,4 +1,4 @@
-import { Role } from '../user/types/user.type.ts';
+import { Role } from '../users/types/user.type.ts';
 
 declare global {
   namespace Express {
