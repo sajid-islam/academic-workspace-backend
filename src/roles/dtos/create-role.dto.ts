@@ -2,8 +2,10 @@ import { Type } from 'class-transformer';
 import {
   ArrayUnique,
   IsArray,
+  IsBoolean,
   IsEnum,
   IsNotEmpty,
+  IsOptional,
   IsString,
   ValidateNested,
 } from 'class-validator';
@@ -30,4 +32,8 @@ export class CreateRoleDto {
   @Type(() => PermissionsDto)
   @IsNotEmpty()
   permissions: PermissionsDto[];
+
+  @IsBoolean()
+  @IsOptional()
+  is_system?: boolean;
 }
