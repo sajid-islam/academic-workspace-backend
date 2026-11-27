@@ -7,6 +7,7 @@ import { JwtService } from '@nestjs/jwt';
 import { InjectModel } from '@nestjs/mongoose';
 import bcrypt from 'bcrypt';
 import { Model } from 'mongoose';
+import { Role } from '../roles/schemas/role.schema.js';
 import { CreateUserDto } from '../users/dto/create-user.dto.js';
 import { User } from '../users/schemas/user.schema.js';
 import { UsersService } from '../users/users.service.js';
@@ -24,7 +25,9 @@ export class AuthService {
   async loginUser(loginUserDto: LoginUserDto) {
     const email = loginUserDto.email;
     const password = loginUserDto.password;
-    const user = await this.userModel.findOne({ email });
+    const user = await this.userModel
+      .findOne({ email })
+      .populate<{ roles: Role[] }>('roles');
 
     if (!user) {
       throw new NotFoundException('User not found');
@@ -38,7 +41,13 @@ export class AuthService {
       throw new UnauthorizedException('Password not correct, try again');
     }
 
-    const payload = { sub: user._id, role: user.role };
+    const roles = user.roles.map((role) => role.name);
+
+    const payload = {
+      sub: user._id,
+      roles,
+      workspaceId: user.workspace,
+    };
     const access_token = await this.jwtService.signAsync(payload);
 
     return { access_token };

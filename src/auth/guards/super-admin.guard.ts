@@ -5,7 +5,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { Request } from 'express';
-import { Role } from '../../users/types/user.type.js';
+import { SystemRole } from '../../users/types/user.type.js';
 
 @Injectable()
 export class SuperAdminGuard implements CanActivate {
@@ -17,7 +17,7 @@ export class SuperAdminGuard implements CanActivate {
       throw new UnauthorizedException('User not found');
     }
 
-    if (user.role !== Role.SuperAdmin) {
+    if (!user.roles.includes(SystemRole.SuperAdmin)) {
       throw new UnauthorizedException("You don't have the power");
     }
     return true;
