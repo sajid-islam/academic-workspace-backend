@@ -34,7 +34,7 @@ export class RolesService {
     }
   }
 
-  async updateRole(id: string, updatedRole: UpdateRoleDto) {
+  async updateOne(id: string, updatedRole: UpdateRoleDto) {
     try {
       const role = await this.roleModel.findById(id);
 
@@ -84,5 +84,19 @@ export class RolesService {
   async getAll() {
     const roles = await this.roleModel.find();
     return { roles };
+  }
+
+  async deleteOne(id: string) {
+    const role = await this.roleModel.findById(id);
+
+    if (!role) {
+      throw new NotFoundException("This role don't exist");
+    }
+
+    if (role.is_system) {
+      throw new BadRequestException("System role can't be modified");
+    }
+    const result = await this.roleModel.deleteOne();
+    return result;
   }
 }

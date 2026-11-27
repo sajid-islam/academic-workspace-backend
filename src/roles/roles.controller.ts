@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Patch,
@@ -18,7 +19,7 @@ import { RolesService } from './roles.service.js';
 export class RolesController {
   constructor(private readonly rolesService: RolesService) {}
 
-  @Post('/create')
+  @Post('create')
   createRole(@Body() roles: CreateRoleDto) {
     return this.rolesService.createRole(roles);
   }
@@ -33,8 +34,13 @@ export class RolesController {
     return this.rolesService.getAll();
   }
 
-  @Patch('/update/:id')
-  updateRole(@Param('id') id: string, @Body() updatedRole: UpdateRoleDto) {
-    return this.rolesService.updateRole(id, updatedRole);
+  @Patch('update/:id')
+  updateOne(@Param('id') id: string, @Body() updatedRole: UpdateRoleDto) {
+    return this.rolesService.updateOne(id, updatedRole);
+  }
+
+  @Delete('delete/:id')
+  deleteRole(@Param('id') id: string) {
+    return this.rolesService.deleteOne(id);
   }
 }
