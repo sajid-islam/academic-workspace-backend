@@ -25,7 +25,7 @@ class ActionMatchResource implements ValidatorConstraintInterface {
     const { resource } = args.object as PermissionsDto;
     const allowedAction = RESOURCE_ACTIONS[resource] ?? [];
 
-    if (!RESOURCE_ACTIONS[resource]) {
+    if (!Resource[resource]) {
       return true;
     }
     return (
@@ -36,7 +36,7 @@ class ActionMatchResource implements ValidatorConstraintInterface {
 
   defaultMessage(args?: ValidationArguments): string {
     const { resource } = args?.object as PermissionsDto;
-    return `${resource} allowed action : ${RESOURCE_ACTIONS[resource]}`;
+    return `actions - ${resource} allowed action : ${RESOURCE_ACTIONS[resource]}`;
   }
 }
 
